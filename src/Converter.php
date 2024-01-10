@@ -505,6 +505,7 @@ class Converter
      */
     protected function handleTagToText()
     {
+        static $indent;
         if (!$this->keepHTML) {
             if (!$this->parser->isStartTag && $this->parser->isBlockElement) {
                 $this->setLineBreaks(2);
@@ -534,7 +535,6 @@ class Converter
                     // don't indent inside <pre> tags
                     if ($this->parser->tagName == 'pre') {
                         $this->out($this->parser->node);
-                        static $indent;
                         $indent = $this->indent;
                         $this->indent = '';
                     } else {
@@ -556,7 +556,6 @@ class Converter
                     } else {
                         // reset indentation
                         $this->out($this->parser->node);
-                        static $indent;
                         $this->indent = $indent;
                     }
 
